@@ -1,0 +1,25 @@
+#!/bin/bash
+#gdb.sh
+echo "1.pwngdb 2.pwndbg 3.peda 4.gef"
+read num
+if [ $num -eq 3 ];then
+    echo "source ~/tools/peda/peda.py" > ~/.gdbinit
+elif [ $num -eq 4 ];then
+    echo "source ~/tools/gef/gef.py" > ~/.gdbinit
+elif [ $num -eq 2 ];then
+    echo "source ~/tools/pwndbg/gdbinit.py" > ~/.gdbinit
+elif [ $num -eq 1 ];then
+    echo "source ~/tools/peda/peda.py" > ~/.gdbinit
+    echo "source ~/tools/Pwngdb/pwngdb.py" >> ~/.gdbinit
+    echo "source ~/tools/Pwngdb/angelheap/gdbinit.py" >> ~/.gdbinit
+
+    echo "define hook-run" >> ~/.gdbinit
+    echo "python" >> ~/.gdbinit
+    echo "import angelheap" >> ~/.gdbinit
+    echo "angelheap.init_angelheap()" >> ~/.gdbinit
+    echo "end" >> ~/.gdbinit
+    echo "end" >> ~/.gdbinit
+else
+    echo "" > ~/.gdbinit
+fi
+gdb $1 $2 $3 $4 $5 $6 $7 $8 $9
